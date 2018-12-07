@@ -82,8 +82,7 @@
 					"2"=>$reg->categoria,
 					"3"=>$reg->unidadMedida,
 					"4"=>$reg->nombre,
-					"5"=>$reg->descripcion,
-					"6"=>'<img width=100px height=100px src="./'.$reg->imagen.'" />');
+					"5"=>$reg->descripcion);
 				$i++;
             }
             
