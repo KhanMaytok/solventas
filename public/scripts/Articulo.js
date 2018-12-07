@@ -97,8 +97,8 @@ function ListadoArticulos(){
                     {   "mDataProp": "2"},
                     {   "mDataProp": "3"},
                     {   "mDataProp": "4"},
-                    {   "mDataProp": "5"},
-                    {   "mDataProp": "6"}
+					{   "mDataProp": "5"},
+					{   "mDataProp": "6"}
 
         	],"ajax": 
 	        	{

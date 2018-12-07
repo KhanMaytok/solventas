@@ -14,46 +14,24 @@
 			$idunidad_medida = $_POST["cboUnidadMedida"];
 			$nombre = $_POST["txtNombre"];
 			$descripcion = $_POST["txtDescripcion"];
-			$imagen = $_FILES["imagenArt"]["tmp_name"];
-			$ruta = $_FILES["imagenArt"]["name"];
 
-			if(move_uploaded_file($imagen, "../Files/Articulo/".$ruta)){
-
-				if(empty($_POST["txtIdArticulo"])){
+			if(empty($_POST["txtIdArticulo"])){
 					
-					if($objArticulo->Registrar($idcategoria, $idunidad_medida, $nombre, $descripcion, "Files/Articulo/".$ruta)){
+					if($objArticulo->Registrar($idcategoria, $idunidad_medida, $nombre, $descripcion)){
 						echo "Articulo Registrado";
 					}else{
 						echo "Articulo no ha podido ser registado.";
 					}
-				}else{
+			}else{
 					
 					$idarticulo = $_POST["txtIdArticulo"];
-					if($objArticulo->Modificar($idarticulo, $idcategoria, $idunidad_medida, $nombre, $descripcion, "Files/Articulo/".$ruta)){
+					if($objArticulo->Modificar($idarticulo, $idcategoria, $idunidad_medida, $nombre, $descripcion)){
 						echo "Informacion del Articulo ha sido actualizada";
 					}else{
 						echo "Informacion del Articulo no ha podido ser actualizada.";
 					}
-				}
-			} else {
-				$ruta_img = $_POST["txtRutaImgArt"];
-				if(empty($_POST["txtIdArticulo"])){
-					
-					if($objArticulo->Registrar($idcategoria, $idunidad_medida, $nombre, $descripcion, $ruta_img)){
-						echo "Articulo Registrado";
-					}else{
-						echo "Articulo no ha podido ser registado.";
-					}
-				}else{
-					
-					$idarticulo = $_POST["txtIdArticulo"];
-					if($objArticulo->Modificar($idarticulo, $idcategoria, $idunidad_medida, $nombre, $descripcion, $ruta_img)){
-						echo "Informacion del Articulo ha sido actualizada";
-					}else{
-						echo "Informacion del Articulo no ha podido ser actualizada.";
-					}
-				}
 			}
+
 
 			break;
 
@@ -79,8 +57,8 @@
 					"2"=>$reg->unidadMedida,
 					"3"=>$reg->nombre,
 					"4"=>$reg->descripcion,
-					"5"=>'<img width=100px height=100px src="./'.$reg->imagen.'" />',
-					'<button class="btn btn-warning" data-toggle="tooltip" title="Editar" onclick="cargarDataArticulo('.$reg->idarticulo.',\''.$reg->idcategoria.'\',\''.$reg->idunidad_medida.'\',\''.$reg->nombre.'\',\''.$reg->descripcion.'\',\''.$reg->imagen.'\')"><i class="fa fa-pencil"></i> </button>&nbsp;'.
+					"5"=>$reg->stock,
+					"6"=>'<button class="btn btn-warning" data-toggle="tooltip" title="Editar" onclick="cargarDataArticulo('.$reg->idarticulo.',\''.$reg->idcategoria.'\',\''.$reg->idunidad_medida.'\',\''.$reg->nombre.'\',\''.$reg->descripcion.'\',\''.$reg->imagen.'\')"><i class="fa fa-pencil"></i> </button>&nbsp;'.
 					'<button class="btn btn-danger" data-toggle="tooltip" title="Eliminar" onclick="eliminarArticulo('.$reg->idarticulo.')"><i class="fa fa-trash"></i> </button>');
 				$i++;
 			}

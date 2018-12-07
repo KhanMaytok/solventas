@@ -7,18 +7,18 @@
 		public function __construct(){
 		}
 
-		public function Registrar($idcategoria, $idunidad_medida, $nombre, $descripcion, $imagen){
+		public function Registrar($idcategoria, $idunidad_medida, $nombre, $descripcion){
 			global $conexion;
-			$sql = "INSERT INTO articulo(idcategoria, idunidad_medida, nombre, descripcion, imagen, estado)
-						VALUES($idcategoria, $idunidad_medida, '$nombre', '$descripcion', '$imagen', 'A')";
+			$sql = "INSERT INTO articulo(idcategoria, idunidad_medida, nombre, descripcion, estado)
+						VALUES($idcategoria, $idunidad_medida, '$nombre', '$descripcion', 'A')";
 			$query = $conexion->query($sql);
 			return $query;
 		}
 		
-		public function Modificar($idarticulo, $idcategoria, $idunidad_medida, $nombre, $descripcion, $imagen){
+		public function Modificar($idarticulo, $idcategoria, $idunidad_medida, $nombre, $descripcion){
 			global $conexion;
 			$sql = "UPDATE articulo set idcategoria = $idcategoria, idunidad_medida = $idunidad_medida, nombre = '$nombre',
-						descripcion = '$descripcion', imagen = '$imagen'
+						descripcion = '$descripcion'
 						WHERE idarticulo = $idarticulo";
 			$query = $conexion->query($sql);
 			return $query;
@@ -33,7 +33,7 @@
 
 		public function Listar(){
 			global $conexion;
-			$sql = "select a.*, c.nombre as categoria, um.nombre as unidadMedida 
+			$sql = "select a.*, c.nombre as categoria, um.nombre as unidadMedida, (SELECT SUM(det.stock_ingreso) FROM detalle_ingreso det WHERE a.idarticulo = det.idarticulo) as stock
 	from articulo a inner join categoria c on a.idcategoria = c.idcategoria
 	inner join unidad_medida um on a.idunidad_medida = um.idunidad_medida where a.estado = 'A' order by idarticulo desc";
 			$query = $conexion->query($sql);
@@ -49,5 +49,4 @@
 			$query = $conexion->query($sql);
 			return $query;
 		}
-
 	}
