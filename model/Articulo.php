@@ -33,7 +33,7 @@
 
 		public function Listar(){
 			global $conexion;
-			$sql = "select a.*, c.nombre as categoria, um.nombre as unidadMedida, (SELECT SUM(det.stock_ingreso) FROM detalle_ingreso det WHERE a.idarticulo = det.idarticulo) as stock,
+			$sql = "select a.*, c.nombre as categoria, um.nombre as unidadMedida, (SELECT SUM(det.stock_actual) FROM detalle_ingreso det WHERE a.idarticulo = det.idarticulo) as stock,
 			(SELECT det.precio_compra FROM detalle_ingreso det WHERE a.idarticulo = det.idarticulo order by det.iddetalle_ingreso LIMIT 1) as precio_compra,
 			(SELECT det.precio_ventapublico FROM detalle_ingreso det WHERE a.idarticulo = det.idarticulo order by det.iddetalle_ingreso LIMIT 1) as precio_venta
 	from articulo a inner join categoria c on a.idcategoria = c.idcategoria
