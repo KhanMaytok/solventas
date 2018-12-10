@@ -1,6 +1,6 @@
 <?php
 // (c) Xavier Nicolay
-// Exemple de génération de devis/facture PDF
+// Exemple de gï¿½nï¿½ration de devis/facture PDF
 
 require('Factura.php');
 
@@ -38,39 +38,34 @@ $f = "";
       $extension = end($trozos);
 
 
-$pdf = new PDF_Invoice( 'P', 'mm', 'A4' );
+$pdf = new PDF_Invoice( 'L', 'mm', [170, 220] );
 $pdf->AddPage();
-$pdf->addSociete( utf8_decode($reg_cli->razon_social),
-                  utf8_decode("$reg_cli->num_sucursal")."\n" .
-                  "Dirección:".utf8_decode(" $reg_cli->direccion")."\n".
-                  "Teléfono: ".utf8_decode("$reg_cli->telefono_suc")."\n" .
-                  "email : $reg_cli->email_suc ","../$f","$extension");
-$pdf->fact_dev( "FACTURA ", "$reg_cli->serie_comprobante-$reg_cli->num_comprobante" );
+
+
 $pdf->temporaire( "" );
+
 $pdf->addDate( $reg_cli->fecha);
 //$pdf->addClient("CL01");
 //$pdf->addPageNumber("1");
 
-$pdf->addClientAdresse(utf8_decode($reg_cli->nombre),"Domicilio: ".utf8_decode($reg_cli->direccion_calle)." - ".utf8_decode($reg_cli->direccion_departamento),$reg_cli->doc.": ".$reg_cli->num_documento,"Email: ".$reg_cli->email,"Telefono: ".$reg_cli->telefono);
-//$pdf->addReglement("Soluciones Innovadoras Perú S.A.C.");
+$pdf->addClientAdresse(utf8_decode($reg_cli->nombre),"".utf8_decode($reg_cli->direccion_calle)." - ".utf8_decode($reg_cli->direccion_departamento),$reg_cli->doc.": ".$reg_cli->num_documento,""," ");
+//$pdf->addReglement("Soluciones Innovadoras Perï¿½ S.A.C.");
 //$pdf->addEcheance("RUC","2147715777");
-//$pdf->addNumTVA("Chongoyape, José Gálvez 1368");
+//$pdf->addNumTVA("Chongoyape, Josï¿½ Gï¿½lvez 1368");
 //$pdf->addReference("Devis ... du ....");
-$cols=array( "CODIGO"    => 23,
-             "DESCRIPCION"  => 78,
-             "CANTIDAD"     => 22,
+$cols=array("CANTIDAD"     => 22,
+           "CODIGO"    => 23,
+            "DESCRIPCION"  => 78,             
              "P.U."      => 25,
-             "DSCTO" => 20,
-             "SUBTOTAL"          => 22 );
+             "SUBTOTAL"  => 22 );
 $pdf->addCols( $cols);
-$cols=array( "CODIGO"    => "L",
-             "DESCRIPCION"  => "L",
-             "CANTIDAD"     => "C",
+$cols=array("CANTIDAD"     => "C", 
+           "CODIGO"    => "L",
+             "DESCRIPCION"  => "L",             
              "P.U."      => "R",
-             "DSCTO" => "R",
              "SUBTOTAL"          => "C" );
-$pdf->addLineFormat( $cols);
-$pdf->addLineFormat($cols);
+//$pdf->addLineFormat( $cols);
+//$pdf->addLineFormat($cols);
 
 $y    = 89;
 
@@ -78,11 +73,10 @@ $query_ped = $objPedido->ImprimirDetallePedido($_GET["id"]);
 
         while ($reg = $query_ped->fetch_object()) {
 
-            $line = array( "CODIGO"    => "'$reg->codigo'",
-                           "DESCRIPCION"  => utf8_decode("$reg->articulo Serie:$reg->serie"),
-                           "CANTIDAD"     => "$reg->cantidad",
+            $line = array( "CANTIDAD"     => "$reg->cantidad",
+                          "CODIGO"    => "'$reg->codigo'",
+                           "DESCRIPCION"  => utf8_decode("$reg->articulo Serie:$reg->serie"),                           
                            "P.U."      => "$reg->precio_venta",
-                           "DSCTO" => "$reg->descuento",
                            "SUBTOTAL"          => "$reg->sub_total");
             $size = $pdf->addLine( $y, $line );
             $y   += $size + 2;
