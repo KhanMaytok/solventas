@@ -576,5 +576,5 @@ function ListadoIngresos(){
     }
 
     function Agregar(id, art){
-        AgregarDetalleCarrito(id, art, "", "", "", "1", "1", "1", "1", "1");
+        AgregarDetalleCarrito(id, art, "", "", "", "", "", "", "", "");
     }
