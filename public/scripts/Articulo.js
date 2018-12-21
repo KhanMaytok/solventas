@@ -99,8 +99,7 @@ function ListadoArticulos(){
                     {   "mDataProp": "4"},
 					{   "mDataProp": "5"},
 					{   "mDataProp": "6"},
-					{   "mDataProp": "7"},
-					{   "mDataProp": "8"}
+					{   "mDataProp": "7"}
         	],"ajax": 
 	        	{
 	        		url: './ajax/ArticuloAjax.php?op=list',

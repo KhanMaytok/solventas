@@ -53,14 +53,13 @@
      		while ($reg = $query_Tipo->fetch_object()) {
 
      			$data[] = array("id"=>$i,
-					"1"=>$reg->categoria,
-					"2"=>$reg->unidadMedida,
-					"3"=>$reg->nombre,
-					"4"=>$reg->descripcion,
-					"5"=>$reg->stock,
-					"6"=>$reg->precio_compra,
-					"7"=>$reg->precio_venta,
-					"8"=>'<button class="btn btn-warning" data-toggle="tooltip" title="Editar" onclick="cargarDataArticulo('.$reg->idarticulo.',\''.$reg->idcategoria.'\',\''.$reg->idunidad_medida.'\',\''.$reg->nombre.'\',\''.$reg->descripcion.'\',\''.$reg->imagen.'\')"><i class="fa fa-pencil"></i> </button>&nbsp;'.
+					"1"=>$reg->unidadMedida,
+					"2"=>$reg->nombre,
+					"3"=>$reg->descripcion,
+					"4"=>$reg->stock,
+					"5"=>$reg->precio_compra,
+					"6"=>$reg->precio_venta,
+					"7"=>'<button class="btn btn-warning" data-toggle="tooltip" title="Editar" onclick="cargarDataArticulo('.$reg->idarticulo.',\''.$reg->idcategoria.'\',\''.$reg->idunidad_medida.'\',\''.$reg->nombre.'\',\''.$reg->descripcion.'\',\''.$reg->imagen.'\')"><i class="fa fa-pencil"></i> </button>&nbsp;'.
 					'<button class="btn btn-danger" data-toggle="tooltip" title="Eliminar" onclick="eliminarArticulo('.$reg->idarticulo.')"><i class="fa fa-trash"></i> </button>');
 				$i++;
 			}
